@@ -1,0 +1,20 @@
+<style>
+  <id>StyleInfoImpl--6c939fca:192773e558a:-20b5</id>
+  <name>鉄道運行本数区間別順方向2024</name>
+  <workspace>
+    <id>WorkspaceInfoImpl-7ee9f4b8:18ebb5c138c:-7ffc</id>
+  </workspace>
+  <format>sld</format>
+  <languageVersion>
+    <version>1.0.0</version>
+  </languageVersion>
+  <filename>鉄道運行本数区間別順方向2024.sld</filename>
+  <legend>
+    <width>73</width>
+    <height>20</height>
+    <format>image/png</format>
+    <onlineResource>arrow_legend.png</onlineResource>
+  </legend>
+  <dateCreated>2024-10-21 02:05:36.207 UTC</dateCreated>
+  <dateModified>2024-10-21 02:05:53.420 UTC</dateModified>
+</style>

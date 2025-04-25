@@ -1,0 +1,16 @@
+<layer>
+  <name>小地域人口0to19</name>
+  <id>LayerInfoImpl--6c939fca:192bd14f894:-3878</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--6c939fca:192bd14f894:-3879</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-11-07 06:30:46.157 UTC</dateCreated>
+</layer>

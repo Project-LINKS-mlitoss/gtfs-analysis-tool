@@ -1,0 +1,16 @@
+<layer>
+  <name>鉄道駅名用</name>
+  <id>LayerInfoImpl-1138f8a8:194d8f49c02:-7fb4</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffc</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-1138f8a8:194d8f49c02:-7fb5</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2025-02-06 02:05:20.385 UTC</dateCreated>
+</layer>

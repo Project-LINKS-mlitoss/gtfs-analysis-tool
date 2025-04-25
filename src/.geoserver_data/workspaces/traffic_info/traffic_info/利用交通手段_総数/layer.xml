@@ -1,0 +1,17 @@
+<layer>
+  <name>利用交通手段_総数</name>
+  <id>LayerInfoImpl--543b1c73:191a360af89:-7f97</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--543b1c73:191a360af89:-7f98</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-31 12:47:43.510 UTC</dateCreated>
+  <dateModified>2025-03-21 14:22:03.129 UTC</dateModified>
+</layer>

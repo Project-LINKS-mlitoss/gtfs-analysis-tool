@@ -1,0 +1,16 @@
+<layer>
+  <name>メッシュ人口18to64</name>
+  <id>LayerInfoImpl--587bace5:1916989e2b8:-7787</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--587bace5:1916989e2b8:-7788</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-21 02:08:05.948 UTC</dateCreated>
+</layer>

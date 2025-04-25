@@ -1,0 +1,19 @@
+<style>
+  <id>StyleInfoImpl-1138f8a8:194d8f49c02:-7ffa</id>
+  <name>到着地凡例</name>
+  <workspace>
+    <id>WorkspaceInfoImpl-7ee9f4b8:18ebb5c138c:-7ffc</id>
+  </workspace>
+  <format>sld</format>
+  <languageVersion>
+    <version>1.0.0</version>
+  </languageVersion>
+  <filename>到着地凡例.sld</filename>
+  <legend>
+    <width>20</width>
+    <height>20</height>
+    <format>image/png</format>
+    <onlineResource>arrival.png</onlineResource>
+  </legend>
+  <dateCreated>2025-02-06 01:54:56.715 UTC</dateCreated>
+</style>

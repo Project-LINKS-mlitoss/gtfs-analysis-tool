@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <h4>ユーザー名、パスワードを入力しログインを行ってください</h4>
+                <hr />
+                <div class="form-group">
+                    <label for="id_username" class="col-md-2 control-label"> User name </label>
+                    <div class="col-md-10">{{ form.username }}</div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="id_password" class="col-md-2 control-label"> Password </label>
+                    <div class="col-md-10">{{ form.password }}</div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="hidden" name="next" value="/" />
+                        <input type="submit" value="Log in" class="btn btn-sm btn-primary" />
+                    </div>
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors">正しいユーザー名とパスワードを入力してください。</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm"></section>
+    </div>
+</div>
+
+{% block scripts %}
+<script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'node_modules/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,16 @@
+<layer>
+  <name>鉄道運行本数区間別合計2024</name>
+  <id>LayerInfoImpl--6c939fca:192773e558a:-1f93</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7fff</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--6c939fca:192773e558a:-1f94</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-10-21 02:37:07.857 UTC</dateCreated>
+</layer>

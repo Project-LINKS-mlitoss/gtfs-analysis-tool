@@ -1,0 +1,54 @@
+<featureType>
+  <id>FeatureTypeInfoImpl--587bace5:1916989e2b8:-7786</id>
+  <name>メッシュ人口65to74</name>
+  <nativeName>メッシュ人口65to74</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl-7ee9f4b8:18ebb5c138c:-7ffb</id>
+  </namespace>
+  <title>メッシュ人口65to74</title>
+  <keywords>
+    <string>features</string>
+    <string>メッシュ人口65to74</string>
+  </keywords>
+  <nativeCRS>GEOGCS[&quot;JGD2000&quot;, 
+  DATUM[&quot;Japanese Geodetic Datum 2000&quot;, 
+    SPHEROID[&quot;GRS 1980&quot;, 6378137.0, 298.257222101, AUTHORITY[&quot;EPSG&quot;,&quot;7019&quot;]], 
+    TOWGS84[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 
+    AUTHORITY[&quot;EPSG&quot;,&quot;6612&quot;]], 
+  PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], 
+  UNIT[&quot;degree&quot;, 0.017453292519943295], 
+  AXIS[&quot;Geodetic longitude&quot;, EAST], 
+  AXIS[&quot;Geodetic latitude&quot;, NORTH], 
+  AUTHORITY[&quot;EPSG&quot;,&quot;4612&quot;]]</nativeCRS>
+  <srs>EPSG:4612</srs>
+  <nativeBoundingBox>
+    <minx>122.93749999999999</minx>
+    <maxx>153.98749999999998</maxx>
+    <miny>24.05833333333333</miny>
+    <maxy>45.525</maxy>
+    <crs>EPSG:4612</crs>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>122.9375</minx>
+    <maxx>153.98749999999998</maxx>
+    <miny>24.05833334985914</miny>
+    <maxy>45.52500004091805</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl-7ee9f4b8:18ebb5c138c:-7ffa</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <simpleConversionEnabled>false</simpleConversionEnabled>
+  <internationalTitle/>
+  <internationalAbstract/>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>

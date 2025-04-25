@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>公共交通計画策定支援ツール</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+
+#img_div {
+    text-align: center;
+    max-width: 1222px;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+#top_img {
+    display: block;
+    width: 1222px;
+    aspect-ratio: 1222 / 343;
+}
+#goto_tool {
+    max-width: 30%;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+</style>
+<script>
+const gotoTool = () => {
+    window.location.href = "/map?open_key={{open_key}}";
+};
+</script>
+</head>
+<body>
+
+<h1 id="head_title">公共交通計画策定支援ツール</h1>
+<h2 id="overview">OverView</h2>
+<p>バス運転手の高齢化や2024年問題等により、地域公共交通の担い手不足等が懸念され、より効率的・効果的な公共交通計画の策定と持続可能な公共交通ネットワークの構築が求められています。<br>
+GTFSデータをはじめとした公共交通分野のオープンデータ等を活用し、地域交通の需給バランスの評価や交通計画検討を支援するシステムです。<br>
+このシステムを活用することで、データに基づいたバス路線再編成や民間の公共交通関連サービスの創出を促進します。<br></p>
+<h2 id="how-to-use">HOW To Use?</h2>
+<p>以下の機能で公共交通計画の策定を支援します。</p>
+<ul>
+<li>GTFS形式のデータ読み込み</li>
+<li>運行頻度の可視化</li>
+<li>交通分担の可視化</li>
+<li>到達圏域分析</li>
+<li>乗降実績の可視化</li>
+<li>ODデータの可視化</li>
+</ul>
+<p><img id="top_img" src="{% static 'app/img/top1.png' %}" alt="概要" /></p>
+<div id="img_div">
+    <img id="goto_tool" src="{% static 'app/img/goto_tool.png' %}" onclick="gotoTool();" />   
+</div>
+</body>
+</html>

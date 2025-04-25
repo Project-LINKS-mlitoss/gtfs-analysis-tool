@@ -1,0 +1,17 @@
+<layer>
+  <name>app_station</name>
+  <id>LayerInfoImpl--587bace5:1916989e2b8:-3969</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--6889335d:19667b64911:-7fff</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--587bace5:1916989e2b8:-396a</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-22 02:42:26.869 UTC</dateCreated>
+  <dateModified>2025-04-24 12:52:46.408 UTC</dateModified>
+</layer>

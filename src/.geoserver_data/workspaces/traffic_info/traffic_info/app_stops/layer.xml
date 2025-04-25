@@ -1,0 +1,17 @@
+<layer>
+  <name>app_stops</name>
+  <id>LayerInfoImpl-2e342089:18ec23f3a62:-7ff9</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--6889335d:19667b64911:-8000</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-2e342089:18ec23f3a62:-7ffa</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-04-09 09:51:28.747 UTC</dateCreated>
+  <dateModified>2025-04-24 12:46:01.42 UTC</dateModified>
+</layer>

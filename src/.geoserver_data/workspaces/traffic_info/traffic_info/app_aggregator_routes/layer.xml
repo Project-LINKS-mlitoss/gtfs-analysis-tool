@@ -1,0 +1,17 @@
+<layer>
+  <name>app_aggregator_routes</name>
+  <id>LayerInfoImpl-3e47b018:18ec1e34f6b:-7ffb</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7fff</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-3e47b018:18ec1e34f6b:-7ffc</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-04-09 08:25:02.397 UTC</dateCreated>
+  <dateModified>2024-09-04 03:53:45.340 UTC</dateModified>
+</layer>

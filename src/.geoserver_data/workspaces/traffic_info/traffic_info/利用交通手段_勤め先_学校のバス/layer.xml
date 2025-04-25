@@ -1,0 +1,17 @@
+<layer>
+  <name>利用交通手段_勤め先_学校のバス</name>
+  <id>LayerInfoImpl--543b1c73:191a360af89:-7f9b</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--543b1c73:191a360af89:-7f9c</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-31 12:47:08.122 UTC</dateCreated>
+  <dateModified>2025-03-21 14:22:12.40 UTC</dateModified>
+</layer>

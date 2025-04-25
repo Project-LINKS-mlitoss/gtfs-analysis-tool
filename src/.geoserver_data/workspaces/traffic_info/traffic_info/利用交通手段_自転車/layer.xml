@@ -1,0 +1,17 @@
+<layer>
+  <name>利用交通手段_自転車</name>
+  <id>LayerInfoImpl--543b1c73:191a360af89:-7f93</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--543b1c73:191a360af89:-7f94</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-31 12:48:31.746 UTC</dateCreated>
+  <dateModified>2025-03-21 14:21:51.253 UTC</dateModified>
+</layer>

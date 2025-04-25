@@ -1,0 +1,130 @@
+networks:
+    internal_network:
+        internal: true
+    external_network:
+        internal: false
+
+services:
+    db:
+        container_name: traffic_infomation_analysis-db-1
+        image: postgis/postgis:16-3.4
+        shm_size: 256m
+        environment:
+            POSTGRES_DB: traffic_info
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        volumes:
+            - ./.db_data:/var/lib/postgresql/data
+        networks:
+            - internal_network
+        ports:
+            - 5432:5432
+        healthcheck:
+            test: pg_isready -U "${POSTGRES_USER:-postgres}" || exit 1
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+    geoserver:
+        container_name: traffic_infomation_analysis-geoserver-1
+        image: kartoza/geoserver:latest
+        volumes:
+            - ./.geoserver_data:/opt/geoserver/data_dir
+            - ./.fonts:/opt/fonts
+        networks:
+            - internal_network
+        ports:
+            - "8080:8080"
+        environment:
+            - GEOSERVER_ADMIN_USER=admin
+            - GEOSERVER_ADMIN_PASSWORD=geoserver
+
+    otp:
+        container_name: traffic_infomation_analysis-otp-1
+        build:
+            context: .
+            dockerfile: Dockerfile.OTP
+        ports:
+            - "127.0.0.1:8081:8080"
+        volumes:
+            - ./open_trip_planner:/otp
+        environment:
+            - OTP_GRAPH_PATH=/otp/data
+        networks:
+            - internal_network
+
+    web:
+        container_name: traffic_infomation_analysis-web-1
+        image: python:3.12
+        command: >
+            /bin/bash -c '
+                apt-get update && dpkg --configure -a &&
+                apt-get install -y libpq-dev libgdal-dev gdal-bin xfonts-75dpi xfonts-base xvfb fonts-ipafont-gothic fonts-ipafont-mincho &&
+                dpkg -i libjpeg-turbo8_2.1.2-0ubuntu1_amd64.deb &&
+                dpkg -i wkhtmltox_0.12.6.1-2.jammy_amd64.deb &&
+                pip install --upgrade pip &&
+                pip install -r requirements.txt &&
+                python manage.py migrate && 
+                python manage.py collectstatic --noinput &&
+                gunicorn core.wsgi:application -b 0.0.0.0:8000
+            '
+        working_dir: /app
+        volumes:
+            - ./web_app:/app
+            - ./.media:/.media
+            - ./open_trip_planner:/otp
+            - ./.static:/app/static
+            - ./.logs:/.logs
+        networks:
+            - external_network
+            - internal_network
+        ports:
+            - "127.0.0.1:8000:8000"
+        depends_on:
+            db:
+                condition: service_healthy
+        env_file:
+            - .env
+        healthcheck:
+            test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+            interval: 60s
+            timeout: 30s
+            retries: 10
+
+    nodejs:
+        image: node:latest
+        working_dir: /app/static
+        volumes:
+            - ./.static:/app/static
+        networks:
+            - external_network
+        command: npm install
+        depends_on:
+            web:
+                condition: service_healthy
+
+    nginx:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+            - ./.static:/app/static
+            - ./.well-known:/app/.well-known
+        networks:
+            - external_network
+            - internal_network
+        depends_on:
+            web:
+                condition: service_healthy
+
+    redis:
+        image: "redis:latest"
+        container_name: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - "./data/redis:/data"
+        networks:
+            - internal_network

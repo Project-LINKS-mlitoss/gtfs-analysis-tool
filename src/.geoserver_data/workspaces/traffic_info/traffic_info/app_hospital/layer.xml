@@ -1,0 +1,17 @@
+<layer>
+  <name>app_hospital</name>
+  <id>LayerInfoImpl--587bace5:1916989e2b8:-1a8</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-8000</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--587bace5:1916989e2b8:-1a9</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-22 12:52:50.206 UTC</dateCreated>
+  <dateModified>2025-03-21 14:24:10.255 UTC</dateModified>
+</layer>

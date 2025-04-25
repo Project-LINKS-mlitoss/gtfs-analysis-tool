@@ -1,0 +1,17 @@
+<layer>
+  <name>app_aggregator_stops_buffer300</name>
+  <id>LayerInfoImpl--71048aa8:18f2ce6c90a:-7ff2</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--71048aa8:18f2ce6c90a:-7ff3</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-04-30 03:10:13.680 UTC</dateCreated>
+  <dateModified>2024-04-30 03:24:01.112 UTC</dateModified>
+</layer>

@@ -1,0 +1,16 @@
+<layer>
+  <name>メッシュ5人口総数</name>
+  <id>LayerInfoImpl--3176637:194b5553632:-59e2</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7ffe</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--3176637:194b5553632:-59e3</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2025-01-30 05:25:33.859 UTC</dateCreated>
+</layer>

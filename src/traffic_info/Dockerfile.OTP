@@ -1,0 +1,6 @@
+FROM openjdk:11-jre-slim
+
+COPY open_trip_planner/ /otp/
+WORKDIR /otp
+EXPOSE 8080
+ENTRYPOINT ["java", "-Xmx3G", "-jar", "otp-1.5.0-shaded.jar", "--build", "./", "--inMemory"]

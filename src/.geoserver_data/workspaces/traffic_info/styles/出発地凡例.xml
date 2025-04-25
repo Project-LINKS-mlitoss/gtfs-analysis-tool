@@ -1,0 +1,19 @@
+<style>
+  <id>StyleInfoImpl-1138f8a8:194d8f49c02:-7ffb</id>
+  <name>出発地凡例</name>
+  <workspace>
+    <id>WorkspaceInfoImpl-7ee9f4b8:18ebb5c138c:-7ffc</id>
+  </workspace>
+  <format>sld</format>
+  <languageVersion>
+    <version>1.0.0</version>
+  </languageVersion>
+  <filename>出発地凡例.sld</filename>
+  <legend>
+    <width>20</width>
+    <height>20</height>
+    <format>image/png</format>
+    <onlineResource>departure.png</onlineResource>
+  </legend>
+  <dateCreated>2025-02-06 01:54:17.125 UTC</dateCreated>
+</style>

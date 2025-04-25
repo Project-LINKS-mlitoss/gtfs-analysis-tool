@@ -1,0 +1,17 @@
+<layer>
+  <name>app_aggregator_stops</name>
+  <id>LayerInfoImpl-3e47b018:18ec1e34f6b:-7ff9</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--6889335d:19667b64911:-8000</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-3e47b018:18ec1e34f6b:-7ffa</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-04-09 08:25:15.434 UTC</dateCreated>
+  <dateModified>2025-04-24 12:47:55.540 UTC</dateModified>
+</layer>

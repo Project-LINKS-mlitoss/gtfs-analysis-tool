@@ -1,0 +1,17 @@
+<layer>
+  <name>鉄道輸送密度2020</name>
+  <id>LayerInfoImpl--587bace5:1916989e2b8:d3</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7fff</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--587bace5:1916989e2b8:d2</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-24 06:49:35.338 UTC</dateCreated>
+  <dateModified>2025-03-21 14:19:59.749 UTC</dateModified>
+</layer>

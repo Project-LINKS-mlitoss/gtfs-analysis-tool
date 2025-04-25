@@ -1,0 +1,603 @@
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" />
+<script>
+    const open_key = "{{ oid }}";
+</script>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header p-0 border-bottom-0">
+                    <h5 class="modal-title">GTFSデータの取得</h5>
+                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <p>
+                    GTFS（General Transit Feed Specification）は、 公共交通機関のスケジュールや関連情報を標準化された形式で提供するためのフォーマットです。
+                    以下のような情報を含む一連のテキストファイルで構成されています。
+                </p>
+                <ul class="gtfs_list_ul">
+                    <li>・routes.txt：交通機関の路線情報</li>
+                    <li>・trips.txt：各路線の運行便情報</li>
+                    <li>・stop_times.txt：各運行便の停留所情報と到着・出発時刻</li>
+                    <li>・stops.txt：停留所のリストとその位置情報（緯度・経度）</li>
+                    <li>・calendar.txt：運行スケジュールのカレンダー情報（平日・休日の運行パターンなど）</li>
+                    <li>・agency.txt：交通機関の運営会社情報</li>
+                    <li>・frequencies.txt：頻度情報（一定時間ごとの運行間隔など）</li>
+                    <li>・fare_attributes.txt：運賃情報</li>
+                </ul>
+                <hr />
+                <h5 class="modal-title">GTFSデータの選択とダウンロード</h5>
+                <p>
+                    分析対象の都道府県を選択すると、GTFS-JPリストを取得、表示されたバス情報を選択、ダウンロード頂くと次画面で対象地域の地図と共にGTFSデータが表示されます。<br />
+                    フォーマットに準拠したGTFSデータをアップロード表示する場合はタブ切り替えで画面に従い操作をお願いします。
+                </p>
+                <div class="d-flex align-items-center">
+                    <div class="example">活用例</div>
+                    地域交通計画における交通空白個所を把握
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+    id="progress_div"
+    class="d-none"
+    style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(128, 128, 128, 0.5); z-index: 50"
+>
+    <div style="width: 80%; height: 100px; background-color: white">
+        <br />
+        <div class="progress-wrapper">
+            <div id="progress-bar" style="background-color: #1a9086; width: 0%">&nbsp;</div>
+        </div>
+        <div id="progress-bar-message" style="display: flex; justify-content: center">処理を開始しています．．．</div>
+        <div id="celery-result"></div>
+    </div>
+</div>
+<div id="top_row" class="row flex-nowrap justify-content-center" style="height: 55px">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+        <img src="/static/app/img/logo20241031.png" width="199px" height="55px" style="position: absolute; left: 22px" alt="公共交通分析ツール" />
+        <h5>GTFSデータ読み込み</h5>
+    </div>
+</div>
+<div id="middle_row" class="row m-1">
+    <div id="step1" class="col-auto d-flex align-items-center ms-3">
+        <div class="d-flex justify-content-right align-items-center">
+            <label class="step_label">STEP1</label>
+        </div>
+    </div>
+    <div class="col-auto d-flex text-left align-items-center">
+        <div class="d-flex align-items-center flex-nowrap">
+            <label id="step1label">表示する都道府県を選択してください</label>
+        </div>
+        <div id="select_container" class="d-flex align-items-center mb-3" style="margin: 10px">
+            <select id="gtfs-pref" name="gtfs-pref" class="form-select" style="width: 250px">
+                <option value="" disabled>都道府県を選択してください</option>
+                <option value="01" disabled>北海道</option>
+                <option value="02" disabled>青森県</option>
+                <option value="03" disabled>岩手県</option>
+                <option value="04" disabled>宮城県</option>
+                <option value="05" disabled>秋田県</option>
+                <option value="06" disabled>山形県</option>
+                <option value="07" disabled>福島県</option>
+                <option value="08" disabled>茨城県</option>
+                <option value="09" disabled>栃木県</option>
+                <option value="10" disabled>群馬県</option>
+                <option value="11" disabled>埼玉県</option>
+                <option value="12" disabled>千葉県</option>
+                <option value="13" disabled>東京都</option>
+                <option value="14" disabled>神奈川県</option>
+                <option value="15" disabled>新潟県</option>
+                <option value="16" selected>富山県</option>
+                <option value="17" disabled>石川県</option>
+                <option value="18" disabled>福井県</option>
+                <option value="19" disabled>山梨県</option>
+                <option value="20" disabled>長野県</option>
+                <option value="21" disabled>岐阜県</option>
+                <option value="22" disabled>静岡県</option>
+                <option value="23" disabled>愛知県</option>
+                <option value="24" disabled>三重県</option>
+                <option value="25" disabled>滋賀県</option>
+                <option value="26" disabled>京都府</option>
+                <option value="27" disabled>大阪府</option>
+                <option value="28" disabled>兵庫県</option>
+                <option value="29" disabled>奈良県</option>
+                <option value="30" disabled>和歌山県</option>
+                <option value="31" disabled>鳥取県</option>
+                <option value="32" disabled>島根県</option>
+                <option value="33" disabled>岡山県</option>
+                <option value="34" disabled>広島県</option>
+                <option value="35" disabled>山口県</option>
+                <option value="36" disabled>徳島県</option>
+                <option value="37" disabled>香川県</option>
+                <option value="38" disabled>愛媛県</option>
+                <option value="39" disabled>高知県</option>
+                <option value="40" disabled>福岡県</option>
+                <option value="41" disabled>佐賀県</option>
+                <option value="42" disabled>長崎県</option>
+                <option value="43" disabled>熊本県</option>
+                <option value="44" disabled>大分県</option>
+                <option value="45" disabled>宮崎県</option>
+                <option value="46" disabled>鹿児島県</option>
+                <option value="47" disabled>沖縄県</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div id="middle_row2" class="row m-1 border-top">
+    <div id="step2" class="col-auto d-flex align-items-center ms-3">
+        <div class="d-flex align-items-center">
+            <label class="step_label">STEP2</label>
+        </div>
+    </div>
+    <div class="col-auto d-flex align-items-center justify-content-end flex-grow-1">
+        <div class="d-flex align-items-center">
+            <label>分析対象のGTFSデータを指定してください</label>
+        </div>
+        <div class="d-flex justify-content-end flex-grow-1">
+            <button class="explanation_button" data-bs-toggle="modal" data-bs-target="#exampleModal">機能の説明</button>
+        </div>
+    </div>
+</div>
+<div id="bottom_row" class="row m-1">
+    <div id="left_col" class="col-12">
+        <ul id="tabular" class="nav nav-tabs">
+            <li class="nav-item">
+                <a
+                    id="tab_download"
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    data-bs-target="#gtfs-download-content"
+                    href="#"
+                    style="background-color: gainsboro; border-bottom: 1px solid gainsboro"
+                >
+                    ダウンロード
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="tab_upload" class="nav-link" data-bs-toggle="tab" data-bs-target="#gtfs-upload-content" href="#" style="background-color: white; border-bottom: 1px solid gainsboro">
+                    アップロード
+                </a>
+            </li>
+        </ul>
+        <div id="tab-content" class="tab-content">
+            <div id="gtfs-download-content" class="border-start border-bottom border-end tab-pane active p-3" style="background-color: gainsboro">
+                <label>
+                    <input type="radio" value="1" name="gtfs-date-radio" checked />
+                    最新の情報
+                </label>
+                <label>
+                    <input type="radio" value="2" name="gtfs-date-radio" />
+                    日付を指定する
+                </label>
+
+                年月日：<input type="date" id="gtfs-date" value="{{ today }}" />
+                <button id="gtfs-repo-download">リポジトリ取得</button>
+                <div id="gtfs-table-wrapper">
+                    <table id="gtfs-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>organization</th>
+                                <th>feed</th>
+                                <th>pref</th>
+                                <th>from_date</th>
+                                <th>to_date</th>
+                                <th>license</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="d-flex align-items-center flex-grow-1">
+                    <div class="d-flex justify-content-start">
+                        <button id="gtfs-download" style="background-color: dark-grey; color: white">ダウンロード</button>
+                        <button id="history_back">地図画面に戻る</button>
+                    </div>
+                </div>
+            </div>
+            <div id="gtfs-upload-content" class="border-start border-bottom border-end tab-pane p-3" style="background-color: gainsboro">
+                <div style="background-color: white; margin: 30px; padding: 10px; height: 400px; text-align: center">
+                    <h4 id="upload_error_header" class="d-none">◆エラー情報</h4>
+                    <p id="upload_error_text" class="text-danger d-none">・エラー情報--------</p>
+                    <h6>データをアップロードしてください</h6>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="fileInput" accept=".zip" />
+                    </div>
+                    <div class="mt-3">
+                        <button id="gtfs-repo-upload-ok">OK</button>
+                        <button id="gtfs-repo-upload-cancel">キャンセル</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="load_overlay">
+    <div class="loader"></div>
+</div>
+
+<link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}" />
+<script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+<script src="{% static 'node_modules/datatables.net/js/dataTables.min.js' %}"></script>
+<script src="{% static 'app/celery_progress/celery_progress.js' %}"></script>
+<link rel="stylesheet" href="{% static 'app/site.css' %}" />
+<script>
+    const setContentWrapperHeight = () => {
+        const topRow = document.getElementById("top_row");
+        const bottomRow = document.getElementById("bottom_row");
+        const leftCol = document.getElementById("left_col");
+        const tabContent1 = document.getElementById("gtfs-download-content");
+        const tabContent2 = document.getElementById("gtfs-upload-content");
+        const tabular = document.getElementById("tabular");
+        const gtw = document.getElementById("gtfs-table-wrapper");
+        const button1 = document.getElementById("gtfs-download");
+        const s1 = document.getElementById("step1");
+        const s2 = document.getElementById("step2");
+
+        if (topRow && bottomRow && leftCol && tabContent1) {
+
+            gtw.style.height = `${window.innerHeight - topRow.offsetHeight - tabular.offsetHeight - 245 - button1.offsetHeight - 10}px`;
+
+            tabContent2.style.height = `${window.innerHeight - topRow.offsetHeight - tabular.offsetHeight - 125 - button1.offsetHeight - 10}px`;
+        }
+        s1.style.width = "95px";
+        s2.style.width = "95px";
+    };
+    window.addEventListener("load", setContentWrapperHeight);
+    window.addEventListener("resize", setContentWrapperHeight);
+
+    document.getElementById("gtfs-repo-upload-ok").addEventListener("click", async (evt) => {
+        evt.preventDefault();
+
+        const file = $("#fileInput")[0].files[0];
+        if (!file) {
+            alert("ファイルが選択されていません。");
+            return;
+        }
+        $("#load_overlay").show();
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await fetch(`/api/gtfs_upload/${open_key}`, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                credentials: "include",
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("Upload successful:", result);
+            alert("GTFSデータのアップロードが完了しました。");
+            window.location.href = "/map?open_key=" + open_key;
+        } catch (error) {
+            console.error("Upload failed:", error);
+            alert("アップロードに失敗しました。内容をご確認頂き、もう一度お試しください。");
+            $("#load_overlay").hide();
+        }
+    });
+    document.getElementById("gtfs-repo-upload-cancel").addEventListener("click", (evt) => {
+        $("#fileInput").val("");
+    });
+
+    document.getElementById("gtfs-download").addEventListener("click", (e) => {
+        let zList = $("[name='download-checkbox']:checked")
+            .map(function () {
+                return this.value;
+            })
+            .get();
+        if (zList.length === 0) return;
+        let pref = $("#gtfs-pref").val();
+
+        const selData = getCheckedRowsData();
+
+        let gDate = $("#gtfs-date").val().replace(/\//g, "-");
+        let radioDate = $("input[name='gtfs-date']:checked").val();
+        if (radioDate == "1") gDate = "";
+
+        $("#progress_div").removeClass("d-none");
+        fetch("/api/gtfs_download", {
+            method: "POST",
+            headers: { "X-CSRFToken": getCookie("csrftoken") },
+            body: JSON.stringify({ urls: zList, session_id: open_key, pref: pref, gDate: gDate, selData: selData }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const taskId = data.task_id;
+                var progressUrl = `/celery-progress/${taskId}/`;
+
+                $("#progress-bar-message").html("");
+                $("#celery-result").html("");
+
+                CeleryProgressBar.initProgressBar(progressUrl, {
+                    onProgress: processProgress,
+                    onSuccess: successProgress,
+                    onError: err,
+                    onTaskError: taskerr,
+                    onDataError: dataerr,
+                });
+            });
+    });
+    const err = (e) => {
+        $("#progress-bar").css("background-color", "#dc4f63");
+        $("#overlay_inner_button1").off("click");
+        $("#progress_div").off("click");
+        $("#progress_div").click((e) => {
+            $("#progress_div").hide();
+            $("#progress_div").addClass("d-none");
+            window.location.reload();
+        });
+    };
+    const taskerr = (e) => {
+        console.info("task error");
+        $("#progress-bar").css("background-color", "#ff0000");
+        $("#overlay_inner_button1").off("click");
+        $("#progress_div").off("click");
+        $("#progress_div").click((e) => {
+            $("#progress_div").hide();
+            $("#progress_div").addClass("d-none");
+            window.location.reload();
+        });
+    };
+    const dataerr = (e) => {
+        console.info("data error");
+        $("#progress-bar").css("background-color", "#000000");
+        $("#overlay_inner_button1").off("click");
+        $("#progress_div").off("click");
+        $("#progress_div").click((e) => {
+            $("#progress_div").hide();
+            $("#progress_div").addClass("d-none");
+            window.location.reload();
+        });
+    };
+    const processProgress = (progressBarElement, progressBarMessageElement, progress) => {
+        progressBarElement.style.width = progress.percent + "%";
+        var description = progress.description || "";
+        progressBarMessageElement.innerHTML = description.replace("\t", "<br />");
+    };
+    const successProgress = async () => {
+        $("#progress-bar-message").html("ダウンロードが完了しました。");
+        await new Promise((resolve) => setTimeout(resolve, 200));
+
+        alert("ダウンロードが完了しました");
+        window.location.href = "/map?open_key=" + open_key;
+    };
+    const getCookie = (name) => {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            let cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    };
+
+    document.getElementById("gtfs-repo-download").addEventListener("click", (e) => {
+        let gDate = "";
+
+        let rb = $("input[name='gtfs-date']:checked").val();
+        if (rb == 1) {
+            gDate = new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "2-digit", day: "2-digit" }).replaceAll("/", "-");
+        } else {
+            gDate = $("#gtfs-date").val().replace(/\//g, "-");
+            if (gDate === "") {
+                alert("日付を選択してください");
+                return;
+            }
+        }
+        let repo_url = "https://api.gtfs-data.jp/v2/files?" + "target_date=" + gDate + "&pref=16";
+        fetch(repo_url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let table = document.getElementById("gtfs-table");
+                let existingTbody = table.querySelector("tbody");
+                if (existingTbody) table.removeChild(existingTbody);
+                let tbody = document.createElement("tbody");
+                table.appendChild(tbody);
+                data.body.forEach((item) => {
+                    let row = tbody.insertRow();
+                    let organizationCell = row.insertCell(0);
+                    let feedCell = row.insertCell(1);
+                    let prefCell = row.insertCell(2);
+                    let fromDateCell = row.insertCell(3);
+                    let toDateCell = row.insertCell(4);
+                    let licenseCell = row.insertCell(5);
+                    organizationCell.textContent = item.organization_name;
+                    feedCell.textContent = item.feed_name;
+                    prefCell.textContent = "富山県";
+                    fromDateCell.textContent = item.file_from_date;
+                    toDateCell.textContent = item.file_to_date;
+                    licenseCell.textContent = item.feed_license_id;
+
+                    let checkboxCell = row.insertCell(0);
+                    checkboxCell.style.textAlign = "center";
+                    let checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "download-checkbox";
+                    checkbox.value = item.file_url;
+                    checkboxCell.appendChild(checkbox);
+                });
+
+                $("#gtfs-table tbody").off("click");
+                $("#gtfs-table tbody").on("click", "tr td", function (e) {
+                    if (!$(e.target).is('input[type="checkbox"]')) {
+                        $(this).closest("tr").find('input[type="checkbox"]').trigger("click");
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    });
+    document.getElementById("tab_download").addEventListener("click", (e) => {
+        let tab1 = document.getElementById("tab_download");
+        let tab2 = document.getElementById("tab_upload");
+
+        tab1.style.setProperty("background-color", "gainsboro");
+        tab2.style.setProperty("background-color", "white");
+
+        $("#middle_row2").show();
+        $("#gtfs-pref").show();
+
+        $("#step1label").text("表示する都道府県を選択してください");
+        setContentWrapperHeight();
+    });
+    document.getElementById("tab_upload").addEventListener("click", (e) => {
+        let tab1 = document.getElementById("tab_download");
+        let tab2 = document.getElementById("tab_upload");
+
+        tab1.style.setProperty("background-color", "white");
+        tab2.style.setProperty("background-color", "gainsboro");
+
+        $("#middle_row2").hide();
+        $("#gtfs-pref").hide();
+
+        $("#step1label").text("アップロードするGTFSデータを指定してください");
+    });
+
+    const getCheckedRowsData = () => {
+        const checkedRowsData = [];
+
+        $("#gtfs-table tbody tr").each(function () {
+            const checkbox = $(this).find("input[name='download-checkbox']");
+            if (checkbox.is(":checked")) {
+                const rowData = {};
+                $(this)
+                    .find("td")
+                    .each(function (index) {
+                        if (index > 0) {
+                            const headerText = $("#gtfs-table thead th").eq(index).text();
+                            rowData[headerText] = $(this).text();
+                        } else {
+                            rowData["download-url"] = checkbox.val();
+                        }
+                    });
+                checkedRowsData.push(rowData);
+            }
+        });
+
+        return checkedRowsData;
+    };
+
+    $("#gtfs-date").change(() => {
+        $("input[name='gtfs-date-radio']").val(["2"]);
+    });
+    $('[name="gtfs-date-radio"]').change(function () {
+        if ($(this).val() == "1") {
+            var now = new Date();
+            var yy = now.getFullYear();
+            var mm = now.getMonth() + 1;
+            let month = ("0" + mm).slice(-2);
+            let day = ("0" + now.getDate()).slice(-2);
+            date = yy + "-" + month + "-" + day;
+            $("#gtfs-date").val(date);
+            $("#gtfs-repo-download").click();
+        }
+    });
+    $("#history_back").click(() => {
+        history.go(-1);
+    });
+
+    $("#gtfs-repo-download").click();
+</script>
+<style>
+    .step_label {
+        font-family: Impact, Charcoal;
+        font-weight: bold;
+        color: gainsboro;
+        font-size: 2em;
+        font-feature-settings: "palt";
+        letter-spacing: 0.1rem;
+        -webkit-text-stroke: 0.5px #d5cdcd;
+    }
+
+    .gtfs_list_ul {
+        padding-left: 7px;
+    }
+
+    .gtfs_list_ul li {
+        list-style-type: none;
+    }
+
+    .modal-body {
+        background-color: #6b6a6a;
+        color: white;
+    }
+
+    .example {
+        width: 60px;
+        height: 25px;
+        color: white;
+        text-align: center;
+        background-color: black;
+        margin-right: 5px;
+    }
+
+    .modal-backdrop {
+        background-color: gainsboro;
+    }
+
+    .explanation_button {
+        padding: 4px 16px;
+        font-size: 16px;
+        background-color: darkgray;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #gtfs-repo-upload-OK {
+        width: 120px;
+        height: 30px;
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+    }
+
+    #gtfs-repo-upload-Cancel {
+        width: 120px;
+        height: 30px;
+        border: 1px solid black;
+    }
+
+    #history_back {
+        margin-left: 7px;
+        padding: 4px 16px;
+        font-size: 16px;
+        background-color: darkgrey;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #history_back:hover {
+        color: black;
+        background-color: f8f9fa;
+    }
+
+    #gtfs-table tr td {
+        cursor: pointer;
+    }
+    #gtfs-table tbody tr:hover {
+        background-color: #a9a9a9;
+    }
+</style>

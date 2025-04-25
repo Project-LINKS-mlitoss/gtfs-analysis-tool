@@ -1,0 +1,16 @@
+<layer>
+  <name>app_merged_routes</name>
+  <id>LayerInfoImpl--50b96d6:191973f9722:-7fc3</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl-77c72ad5:18ebb5aa73f:-7fff</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl--50b96d6:191973f9722:-7fc4</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2024-08-29 05:13:24.139 UTC</dateCreated>
+</layer>

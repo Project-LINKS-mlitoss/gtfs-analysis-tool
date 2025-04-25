@@ -1,0 +1,13 @@
+{
+    "dependencies": {
+        "bootstrap": "^5.2.3",
+        "chart.js": "^4.4.0",
+        "chartjs-plugin-annotation": "^3.0.1",
+        "@turf/turf": "^6.5.0",
+        "jquery": "^3.7.0",
+        "jquery-validation": "^1.19.5",
+        "datatables.net-dt": "^2.0.5",
+        "ol": "^9.1.0",
+        "ol-ext": "^4.0.11"
+    }
+}
